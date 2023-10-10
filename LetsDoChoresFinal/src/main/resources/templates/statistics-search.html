@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+</head>
+<body>
+<h2>ADMIN</h2>
+
+<form th:action="@{/statistics}" method="get">
+    <input type="text" placeholder="Player name" th:name="name">
+    <button type="submit">Search</button>
+</form>
+
+</body>
+</html>

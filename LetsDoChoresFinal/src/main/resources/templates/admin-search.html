@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<table>
+<tr>
+  <th>ID</th>
+  <th>First Name</th>
+  <th>Last Name</th>
+  <th>Coins</th>
+  <th>Chores</th>
+  <th>Reviews</th>
+  <th>Activities</th>
+</tr>
+  <tr th:each="player : ${players}">
+    <td th:text="${player.id}"></td>
+    <td th:text="${player.firstName}"></td>
+    <td th:text="${player.lastName}"></td>
+    <td th:text="${player.coins}"></td>
+    <td th:text="${player.chores.size()}"></td>
+    <td th:text="${player.reviews.size()}"></td>
+    <td th:text="${player.playerActivities.size()}"></td>
+  </tr>
+
+</table>
+
+<a href="/">Home</a>
+
+
+
+</body>
+</html>

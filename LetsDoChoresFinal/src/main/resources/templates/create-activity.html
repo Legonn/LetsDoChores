@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+</head>
+<body>
+
+<h2>Create Activity</h2>
+<form action="#" th:action="@{/activity/createActivity}" th:object="${activity}" th:method="POST">
+    <lable type="text">Activity Name:</lable>
+    <input type="text" th:field="*{name}">
+    <lable type="text">Activity Cost:</lable>
+    <input type="number" th:field="*{coins}">
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>

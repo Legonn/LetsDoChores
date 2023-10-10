@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+
+  <style>
+body {
+        margin: 0;
+        padding: 100;
+        background-image: url('/person5.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height:100vh;
+    }
+h2 {
+    text-align: center;
+    font-size:64px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color:yellow;
+    text-shadow: 2px 2px 0 black;
+}
+
+
+.home {
+     position: absolute;
+     bottom: 20px;
+     right: 20px;
+        }
+
+
+.form{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+</style>
+</head>
+<body>
+
+<h2>Leave your Review</h2>
+
+<form action="#" th:action="@{/review/createReview}" th:object="${review}" method="POST">
+  <div class="form">
+    <label type="text">Enter Chore Description</label>
+    <input type="text" th:field="*{description}">
+    <label type="text">Select Duration</label>
+    <input type="text" th:field="*{value}">
+    <input type="text" th:field="*{duration}">
+    <label type="text">Select Difficulty</label>
+    <input type="text" th:field="*{difficulty}">
+    <input type="text" th:field="*{comment}">
+    <input type="hidden" name="choreId" th:value="${choreId}" />
+    <button type="submit">Save</button>
+  </div>
+
+</form>
+
+<a href="/" class="btn btn-warning home">Home</a>
+
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Today's Chores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+    body {
+        margin: 0;
+        padding: 100;
+        background-image: url('/person2.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height:100vh;
+    }
+
+    h2 {
+    text-align: center;
+    font-size:64px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color:yellow;
+    text-shadow: 2px 2px 0 black;
+
+}
+
+li{
+list-style:none;
+margin-top:2px;
+
+}
+ .menu {
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    flex-direction:column;
+    margin:20px;
+    gap:10px;
+    }
+
+    </style>
+</head>
+<body>
+<h2>Your Chores for Today</h2>
+
+<div class="menu">
+    <button class="togglePlayerMenu btn btn-warning" th:text="${player.firstName}"></button>
+    <ul class="playerMenu" style="display : none">
+        <li><a th:href="@{/player/choresToReview(id=${player.id})}" class="btn btn-warning">Review
+            Chores</a></li>
+        <li><a th:href="@{/chores/createChoresForm(playerId=${player.id})}" class="btn btn-warning">Create
+            Chores</a></li>
+        <li><a th:href="@{/review/findAllReviews(playerId=${player.id})}" class="btn btn-warning">Your
+            Reviews</a></li>
+        <li><a th:href="@{/player/findPlayerById(playerId=${player.id})}" class="btn btn-warning">Player
+            Profile</a></li>
+        <li><a th:href="@{/activity/shop(playerId=${player.id})}" class="btn btn-warning">Shop</a></li>
+        <li><a th:href="@{/player/inventory(playerId=${player.id})}" class="btn btn-warning">Inventory</a></li>
+        <li><a th:href="@{/}" class="btn btn-warning">Home</a></li>
+    </ul>
+</div>
+<table class="table table-dark">
+    <tr>
+        <th>Description</th>
+        <th>Coins</th>
+        <th>Duration</th>
+        <th>Difficulty</th>
+        <th>Done</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="chore : ${chores}">
+        <td th:text="${chore.description}"></td>
+        <td th:text="${chore.value}"></td>
+        <td th:text="${chore.duration}"></td>
+        <td th:text="${chore.difficulty}"></td>
+        <td>
+            <div style="display: flex; justify-content: center; align-items: center; height: 5vh;">
+                <svg th:if="${chore.isDone==true}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green"
+                     width="32"
+                     height="32"
+                     class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                </svg>
+
+                <svg th:if="${chore.isDone !=true}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red"
+                     width="32"
+                     height="32"
+                     class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
+                </svg>
+            </div>
+        </td>
+        <td>
+            <a th:href="@{/chores/done(id=${chore.id})}" >Done</a>
+        </td>
+    </tr>
+</table>
+
+<script>
+    function toggleMenu(button) {
+    const parentDiv = button.parentElement;
+    const menu = parentDiv.querySelector(".playerMenu");
+    if(menu.style.display === "none" || menu.style.display === ""){
+    menu.style.display ="block";
+    }else {
+    menu.style.display ="none";
+    }
+    }
+
+
+const toggleButtons = document.querySelectorAll(".togglePlayerMenu");
+toggleButtons.forEach(function(button) {
+button.addEventListener("click", function() {
+toggleMenu(button);
+});
+});
+
+
+</script>
+
+
+</body>
+</html>
